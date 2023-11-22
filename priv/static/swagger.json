@@ -1,0 +1,570 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "category": {
+      "description": "Create a new category",
+      "example": {
+        "category": {
+          "is_private": false,
+          "name": "Jaguar"
+        }
+      },
+      "properties": {
+        "is_private": {
+          "description": false,
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Jaguar",
+          "type": "string"
+        }
+      },
+      "title": "Create Category",
+      "type": "object"
+    },
+    "comment": {
+      "description": "Create a new listing",
+      "example": {
+        "comment": "Hello",
+        "id": 3
+      },
+      "properties": {
+        "comment": {
+          "description": "Hello",
+          "type": "string"
+        }
+      },
+      "required": [
+        "comment"
+      ],
+      "title": "Create listing",
+      "type": "object"
+    },
+    "delete": {
+      "description": "Delete a category",
+      "example": {
+        "id": 1
+      },
+      "properties": {
+        "id": {
+          "description": 1,
+          "type": "integer"
+        }
+      },
+      "title": "Delete Category",
+      "type": "object"
+    },
+    "listing": {
+      "description": "Create a new listing",
+      "example": {
+        "category": "Alto",
+        "content": "Red Color",
+        "images": [
+          "alto.png",
+          "range_rover.jpg"
+        ],
+        "is_private": true,
+        "title": "Buy the car"
+      },
+      "properties": {
+        "category": {
+          "description": "Alto",
+          "type": "string"
+        },
+        "images": {
+          "description": [
+            "alto.png",
+            "range_rover.jpg"
+          ],
+          "type": "array"
+        },
+        "is_private": {
+          "description": false,
+          "type": "boolean"
+        },
+        "title": {
+          "description": "Jaguar",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "title"
+      ],
+      "title": "Create listing",
+      "type": "object"
+    },
+    "login": {
+      "description": "Login",
+      "example": {
+        "user": {
+          "email": "xyz@gmail.com",
+          "password": "secret"
+        }
+      },
+      "properties": {
+        "email": {
+          "description": "xyz@gmail.com",
+          "type": "string"
+        },
+        "password": {
+          "description": "secret",
+          "type": "string"
+        }
+      },
+      "title": "Login",
+      "type": "object"
+    },
+    "response": {
+      "description": "CategoryResponse",
+      "example": {
+        "is_private": false,
+        "msg": "Category created successfully",
+        "name": "Jaguar",
+        "status": "ok"
+      },
+      "title": "CategoryResponse",
+      "type": "object"
+    },
+    "response_comment": {
+      "description": "Reply to a Listing by listing id",
+      "example": {
+        "msg": "Comment has been added",
+        "status": "ok"
+      },
+      "title": "Reply to a Listing by listing id",
+      "type": "object"
+    },
+    "response_delete": {
+      "description": "DeleteCategoryResponse",
+      "example": {
+        "msg": "Category moved to trash",
+        "status": "ok"
+      },
+      "title": "DeleteCategoryResponse",
+      "type": "object"
+    },
+    "response_listing": {
+      "description": "Listing Response",
+      "example": {
+        "content": "Here we go",
+        "is_private": false,
+        "title": "Daves List"
+      },
+      "title": "Listing Response",
+      "type": "object"
+    },
+    "response_login": {
+      "description": "LoginResponse",
+      "example": {
+        "status": "successfully login",
+        "token": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkYXZlc2xpc3QiLCJleHAiOjE2NjQ1MzAyMjYsImlhdCI6MTY2MjExMTAyNiwiaXNzIjoiZG\n                  F2ZXNsaXN0IiwianRpIjoiMDJiZmJjZDctYWM2Zi00YjliLWExMTctZmM4MzcyY2M0MDg0IiwibmJmIjoxNjYyMTExMDI1LCJzdWIiOiIyIiwidHlwIjoiY\n                  WNjZXNzIn0.lwo0cavquHZUKHseMiQLncHkYPShdtQUwhxVWkjaMqesjADVmADyMUXoVmTxLc95XGk_UKIhb8Ipddmbg2XrDQ"
+      },
+      "title": "LoginResponse",
+      "type": "object"
+    },
+    "response_public_listing": {
+      "description": "Public Listing Response",
+      "example": [
+        {
+          "content": "Here we go",
+          "is_private": false,
+          "title": "Daves List"
+        },
+        {
+          "content": "Here We GOo",
+          "is_private": false,
+          "title": "Daves"
+        }
+      ],
+      "title": "Public Listing Response",
+      "type": "object"
+    },
+    "signup": {
+      "description": "Sign_Up",
+      "example": {
+        "email": "xyz@gmail.com",
+        "password": "secret",
+        "username": "David"
+      },
+      "properties": {
+        "email": {
+          "description": "xyz@gmail.com",
+          "type": "string"
+        },
+        "password": {
+          "description": "secret",
+          "type": "string"
+        },
+        "username": {
+          "description": "David",
+          "type": "string"
+        }
+      },
+      "title": "Sign_Up",
+      "type": "object"
+    }
+  },
+  "host": "localhost:4000",
+  "info": {
+    "description": "API Documentation for MyAPI v1",
+    "termsOfService": "Open for public",
+    "title": "Daves List",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/category": {
+      "post": {
+        "description": "Create Category",
+        "operationId": "DaveslistWeb.CategoryController.create",
+        "parameters": [
+          {
+            "description": "Params",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Create Category",
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/api/category/:id/delete": {
+      "delete": {
+        "description": "Delete a Category",
+        "operationId": "DaveslistWeb.CategoryController.delete",
+        "parameters": [
+          {
+            "description": "category ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_delete"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Delete Category",
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/api/listings": {
+      "get": {
+        "description": "All public and private listing are shown here",
+        "operationId": "DaveslistWeb.ListingController.all_listings",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_public_listing"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "All Listings",
+        "tags": [
+          "Listing"
+        ]
+      },
+      "post": {
+        "description": "Create listings",
+        "operationId": "DaveslistWeb.ListingController.create",
+        "parameters": [
+          {
+            "description": "Params",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/listing"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_public_listing"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Create listings",
+        "tags": [
+          "Listing"
+        ]
+      }
+    },
+    "/api/listings/:id/delete": {
+      "delete": {
+        "description": "Delete Listing",
+        "operationId": "DaveslistWeb.ListingController.delete",
+        "parameters": [
+          {
+            "description": "Listing ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_delete"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Delete Listing",
+        "tags": [
+          "Listing"
+        ]
+      }
+    },
+    "/api/listings/:id/edit": {
+      "get": {
+        "description": "Edit Listing",
+        "operationId": "DaveslistWeb.ListingController.edit",
+        "parameters": [
+          {
+            "description": "Listing ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_listing"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Edit Listing",
+        "tags": [
+          "Listing"
+        ]
+      }
+    },
+    "/api/listings/reply": {
+      "post": {
+        "description": "Reply to a Listing by listing id",
+        "operationId": "DaveslistWeb.ReplyController.create",
+        "parameters": [
+          {
+            "description": "Params",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_comment"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Reply to a Listing by listing id",
+        "tags": [
+          "Reply"
+        ]
+      }
+    },
+    "/api/login": {
+      "post": {
+        "description": "Login",
+        "operationId": "DaveslistWeb.UserController.login",
+        "parameters": [
+          {
+            "description": "Params",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_login"
+            }
+          }
+        },
+        "summary": "Login",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/public-listings": {
+      "get": {
+        "description": "Public listings are listed",
+        "operationId": "DaveslistWeb.ListingController.public_listings",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response_public_listing"
+            }
+          }
+        },
+        "summary": "Public Listings",
+        "tags": [
+          "Listing"
+        ]
+      }
+    },
+    "/api/signup": {
+      "post": {
+        "description": "Sign_Up",
+        "operationId": "DaveslistWeb.UserController.create",
+        "parameters": [
+          {
+            "description": "Params",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/signup"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/response"
+            }
+          }
+        },
+        "summary": "Sign_Up",
+        "tags": [
+          "User"
+        ]
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https",
+    "ws",
+    "wss"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "description": "API Token must be provided via `Authorization: Bearer ` header",
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "User resources",
+      "name": "Users"
+    }
+  ]
+}
